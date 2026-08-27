@@ -1,0 +1,48 @@
+<div class="orders">
+  <div class="container">
+
+    <div class="orders-title">Личный кабинет</div>
+
+    <div class="personal-tabs">
+      <a routerLink="/profile" class="personal-tab">Личные данные</a>
+      <a routerLink="/orders" class="personal-tab active">Ваши заказы</a>
+    </div>
+
+    <div class="form-block">
+      <div class="form-block-title">Ваши заказы</div>
+      <div class="form-block-hint">Здесь отображается история ваших заказов.</div>
+    </div>
+
+    @if (orders.length > 0) {
+      <div class="orders-list">
+        @for (order of orders; track $index) {
+          <div class="order-row">
+            <div class="order-row-number">Заказ №{{ orders.length - $index }}</div>
+
+            <div class="order-row-content">
+              <div class="order-row-count">Кол-во товаров: {{ getItemsCount(order) }}</div>
+
+              <div class="order-row-items">
+                @for (item of order.items; track $index) {
+                  <div class="order-row-item-name">{{ item.name }}</div>
+                  <div class="order-row-item-quantity">{{ item.quantity }} шт.</div>
+                }
+              </div>
+            </div>
+
+            <div class="order-row-status" [class]="getStatusClass(order.status)">
+              {{ getStatusLabel(order.status) }}
+            </div>
+
+            <div class="order-row-total">{{ order.totalAmount }} BYN</div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="orders-empty">
+        <div class="orders-empty-text">Вы еще не сделали ни одного заказа.</div>
+        <a routerLink="/catalog" class="button button-large">Перейти в каталог</a>
+      </div>
+    }
+  </div>
+</div>

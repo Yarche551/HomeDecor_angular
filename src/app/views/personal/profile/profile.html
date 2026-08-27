@@ -1,0 +1,97 @@
+<div class="profile">
+  <div class="container">
+
+    <div class="profile-title">Личный кабинет</div>
+
+    <div class="personal-tabs">
+      <a routerLink="/profile" class="personal-tab active">Личные данные</a>
+      <a routerLink="/orders" class="personal-tab">Ваши заказы</a>
+    </div>
+
+    <form class="profile-form" [formGroup]="userForm" (ngSubmit)="updateUserInfo()">
+
+      <div class="form-block">
+        <div class="form-block-title">Личные данные</div>
+        <div class="form-block-hint">
+          Введённые данные автоматически подставятся при оформлении заказа.
+        </div>
+
+        <div class="form-fields">
+          <div class="form-field">
+            <input type="text" class="input" formControlName="lastName" placeholder="Фамилия">
+          </div>
+          <div class="form-field">
+            <input type="text" class="input" formControlName="firstName" placeholder="Имя">
+          </div>
+          <div class="form-field">
+            <input type="text" class="input" formControlName="fatherName" placeholder="Отчество">
+          </div>
+          <div class="form-field">
+            <input type="text" class="input" formControlName="phone" placeholder="Телефон">
+          </div>
+          <div class="form-field">
+            <input type="text" class="input" formControlName="email" placeholder="E-mail"
+                   [class.error]="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-block">
+        <div class="form-block-title">Адрес доставки</div>
+
+        <div class="form-fields">
+          <div class="form-field form-field-wide">
+            <input type="text" class="input" formControlName="street" placeholder="Улица">
+          </div>
+          <div class="form-field form-field-narrow">
+            <input type="text" class="input" formControlName="house" placeholder="№ дома">
+          </div>
+          <div class="form-field form-field-narrow">
+            <input type="text" class="input" formControlName="entrance" placeholder="Подъезд">
+          </div>
+          <div class="form-field form-field-apartment">
+            <input type="text" class="input" formControlName="apartment" placeholder="№ квартиры">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-block">
+        <div class="form-block-title">Предпочитаемый способ доставки</div>
+
+        <div class="form-tabs">
+          <div class="form-tab" [class.active]="deliveryType === deliveryTypes.delivery"
+               (click)="changeDeliveryType(deliveryTypes.delivery)">Курьером
+          </div>
+          <div class="form-tab" [class.active]="deliveryType === deliveryTypes.self"
+               (click)="changeDeliveryType(deliveryTypes.self)">Самовывоз
+          </div>
+        </div>
+      </div>
+
+      <div class="form-block">
+        <div class="form-block-title">Предпочитаемый способ оплаты</div>
+
+        <div class="form-radios">
+          <label class="form-radio">
+            <input type="radio" formControlName="paymentType" [value]="paymentTypes.cardOnline">
+            <span>Оплата банковской картой в интернет-магазине</span>
+          </label>
+          <label class="form-radio">
+            <input type="radio" formControlName="paymentType" [value]="paymentTypes.cardToCourier">
+            <span>Безналичный расчет при получении</span>
+          </label>
+          <label class="form-radio">
+            <input type="radio" formControlName="paymentType" [value]="paymentTypes.cashToCourier">
+            <span>Наличный расчет при получении</span>
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="button" [disabled]="userForm.invalid || userForm.pristine">
+        Сохранить
+      </button>
+    </form>
+
+    <div class="profile-decor"></div>
+  </div>
+</div>

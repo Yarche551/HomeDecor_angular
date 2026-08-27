@@ -1,0 +1,132 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.order {
+  padding-top: 86px;
+  padding-bottom: 110px;
+
+  .order-title {
+    @include head-lora-32;
+    margin-bottom: 30px;
+  }
+
+  .order-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .order-form {
+    width: 646px;
+  }
+
+  .order-summary {
+    width: 422px;
+    flex-shrink: 0;
+
+    .order-summary-box {
+      box-sizing: border-box;
+      padding: 40px;
+      background: $green-light-bg;
+      border-radius: 5px;
+
+      .order-summary-title {
+        font-family: 'Lora', sans-serif;
+        font-size: 26px;
+        line-height: 130%;
+        color: $green-text-color;
+        margin-bottom: 20px;
+      }
+
+      .order-summary-row {
+        display: flex;
+        align-items: baseline;
+        margin-bottom: 10px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .order-summary-label {
+          font-size: 16px;
+          line-height: 130%;
+          color: $gray-text-color;
+        }
+
+        .order-summary-value {
+          margin-left: 12px;
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 130%;
+          color: $gray-text-color;
+        }
+
+        &.order-summary-total {
+          .order-summary-label,
+          .order-summary-value {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .button {
+      width: 100%;
+      margin-top: 14px;
+    }
+  }
+}
+
+// Попап «Благодарим за заказ!»
+.thanks-popup {
+  position: relative;
+  box-sizing: border-box;
+  width: 727px;
+  height: 489px;
+  padding: 100px 40px 0 40px;
+  overflow: hidden;
+  text-align: center;
+  background: #ffffff;
+
+  .thanks-popup-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+    color: $placeholder-color;
+    display: flex;
+  }
+
+  .thanks-popup-title {
+    font-family: 'Lora', sans-serif;
+    font-size: 32px;
+    line-height: 130%;
+    color: $green-text-color;
+  }
+
+  .thanks-popup-accent {
+    margin-top: 40px;
+    font-size: 20px;
+    line-height: 130%;
+    color: $green-input-border;
+  }
+
+  .thanks-popup-text {
+    margin-top: 5px;
+    font-size: 20px;
+    line-height: 130%;
+    color: $green-text-color;
+  }
+
+  .thanks-popup-image {
+    position: absolute;
+    left: 216px;
+    top: 273px;
+    width: 296px;
+    height: 216px;
+    background-image: url('/images/page/thanks.png');
+    background-size: 296px auto;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+}

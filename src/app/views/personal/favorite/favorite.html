@@ -1,0 +1,51 @@
+<div class="favorite">
+  <div class="container">
+
+    <div class="favorite-title">Избранное</div>
+
+    @if (favoriteService.favorites().length > 0) {
+      <div class="favorite-items">
+        @for (item of favoriteService.favorites(); track item.id) {
+          <div class="favorite-item">
+            <a [routerLink]="'/product/' + item.url" class="favorite-item-image"
+               style="background-image: url({{serverStaticPath + item.image}})"></a>
+
+            <a [routerLink]="'/product/' + item.url" class="favorite-item-name">{{ item.name }}</a>
+
+            <div class="favorite-item-price">{{ item.price }} BYN</div>
+
+            <div class="favorite-item-actions">
+              @if (isInCart(item.id)) {
+                <!-- товар уже в корзине: показываем актуальное количество -->
+                <count-selector [count]="getCountInCart(item.id)"
+                                (onCountChange)="updateCount(item.id, $event)"></count-selector>
+                <button class="button button-large button-in-cart" (click)="removeFromCart(item.id)"
+                        title="Нажмите, чтобы удалить товар из корзины">В корзине
+                </button>
+              } @else {
+                <button class="button button-large" (click)="addToCart(item.id)">В корзину</button>
+              }
+            </div>
+
+            <a class="favorite-item-remove" (click)="removeFromFavorite(item.id)"
+               title="Удалить из избранного">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path transform="matrix(0.70711 0.70711 -0.70711 0.70711 0.22843 0.65)"
+                      d="M0.5 -1 C0.224 -1 0 -0.776 0 -0.5 C0 -0.224 0.224 0 0.5 0 L0.5 -1 Z M17.5 0 C17.776 0 18 -0.224 18 -0.5 C18 -0.776 17.776 -1 17.5 -1 L17.5 0 Z M0.5 0 L17.5 0 L17.5 -1 L0.5 -1 L0.5 0 Z"
+                      fill="currentColor"/>
+                <path transform="matrix(-0.70711 0.70711 -0.70711 -0.70711 12.9236 -0.07732)"
+                      d="M0.5 -1 C0.224 -1 0 -0.776 0 -0.5 C0 -0.224 0.224 0 0.5 0 L0.5 -1 Z M17.5 0 C17.776 0 18 -0.224 18 -0.5 C18 -0.776 17.776 -1 17.5 -1 L17.5 0 Z M0.5 0 L17.5 0 L17.5 -1 L0.5 -1 L0.5 0 Z"
+                      fill="currentColor"/>
+              </svg>
+            </a>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="favorite-empty">
+        <div class="favorite-empty-text">В избранном пока ничего нет. Загляните в каталог — там есть из чего выбрать.</div>
+        <a routerLink="/catalog" class="button button-large">Перейти в каталог</a>
+      </div>
+    }
+  </div>
+</div>

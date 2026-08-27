@@ -1,0 +1,104 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.orders {
+  padding-top: 50px;
+  padding-bottom: 110px;
+
+  .orders-title {
+    @include head-lora-32;
+    margin-bottom: 30px;
+  }
+
+  .orders-list {
+    margin-top: 47px;
+
+    .order-row {
+      display: grid;
+      grid-template-columns: 317px 529px 125px 1fr;
+      align-items: start;
+      padding-bottom: 46px;
+      margin-bottom: 52px;
+      border-bottom: 1px solid $line-color;
+
+      &:last-child {
+        border-bottom: 0;
+        margin-bottom: 0;
+      }
+
+      .order-row-number {
+        font-size: 20px;
+        line-height: 130%;
+        color: $gray-text-color;
+      }
+
+      .order-row-content {
+        padding-top: 3px;
+
+        .order-row-count {
+          font-size: 16px;
+          line-height: 130%;
+          color: $muted-color;
+        }
+
+        .order-row-items {
+          display: grid;
+          grid-template-columns: 211px auto;
+          margin-top: 12px;
+          font-size: 16px;
+          line-height: 130%;
+          color: $muted-color;
+
+          .order-row-item-name,
+          .order-row-item-quantity {
+            padding: 1px 0;
+          }
+        }
+      }
+
+      .order-row-status {
+        box-sizing: border-box;
+        width: 125px;
+        height: 37px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid $status-delivery;
+        border-radius: 50px;
+        font-size: 16px;
+        color: $status-delivery;
+
+        &.status-success {
+          border-color: $status-success;
+          color: $status-success;
+        }
+
+        &.status-cancelled {
+          border-color: $status-cancelled;
+          color: $status-cancelled;
+        }
+      }
+
+      .order-row-total {
+        text-align: right;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 130%;
+        color: $gray-text-color;
+      }
+    }
+  }
+
+  .orders-empty {
+    .orders-empty-text {
+      font-size: 20px;
+      line-height: 130%;
+      color: $gray-text-color;
+      margin-bottom: 25px;
+    }
+
+    .button {
+      width: 290px;
+    }
+  }
+}

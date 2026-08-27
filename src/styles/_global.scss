@@ -1,0 +1,185 @@
+html, body {
+  margin: 0;
+  padding: 0;
+
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+}
+
+.container {
+  max-width: $container-width;
+  margin: 0 auto;
+}
+
+.input {
+  box-sizing: border-box;
+  height: 53px;
+  border: 1.5px solid $green-input-border;
+  border-radius: 3px;
+  padding: 0 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: $gray-text-color;
+  outline: none;
+
+  &::placeholder {
+    color: $placeholder-color;
+  }
+
+  &.error {
+    border-color: $status-cancelled;
+  }
+
+  &[readonly] {
+    background: #f6f6f6;
+  }
+}
+
+.small-input {
+  border: 1px solid $green-border;
+  border-radius: 5px;
+  text-align: center;
+  padding: 2px;
+  box-sizing: border-box;
+  width: 40px;
+  height: 28px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: $green-border;
+  outline: none;
+}
+
+.button {
+  background: $green-button;
+  text-align: center;
+  padding: 15px;
+  line-height: 21px;
+  box-sizing: border-box;
+  cursor: pointer;
+  border: 0;
+  border-radius: 5px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+
+  // кнопки с более крупной надписью (корзина, избранное) — 53px по макету
+  &.button-large {
+    font-size: 18px;
+    line-height: 23px;
+  }
+
+  // «В избранное» на странице товара
+  &.button-transparent {
+    background-color: transparent;
+    border: 1px solid $green-border;
+    color: $green-text-color;
+  }
+
+  // «Продолжить покупки» в корзине
+  &.button-outline {
+    background-color: transparent;
+    border: 1px solid $green-border;
+    border-radius: 3px;
+    color: $green-border;
+  }
+
+  // состояние "товар уже в корзине"
+  &.button-in-cart {
+    background-color: #ffffff;
+    border: 1px solid $green-border;
+    color: $green-text-color;
+  }
+
+  &.button-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      margin-left: 16px;
+    }
+  }
+
+  &:disabled {
+    background: gray;
+    cursor: not-allowed;
+  }
+}
+
+a.button {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.mat-mdc-menu-item {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  color: $gray-text-color;
+  text-decoration: none;
+
+  .mat-mdc-menu-item-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: $gray-text-color;
+  }
+
+  span {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+
+    a {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      text-decoration: none;
+      color: $gray-text-color;
+    }
+  }
+}
+
+.carousel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+
+  .carousel-title {
+    @include head-lora-32;
+  }
+
+  .carousel-arrows {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      cursor: pointer;
+
+      &:first-child {
+        margin-right: 30px;
+      }
+    }
+  }
+}
+
+// Попап «Благодарим за заказ!» — контент задает свои размеры сам
+.thanks-dialog {
+  .mat-mdc-dialog-surface {
+    padding: 0;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .mat-mdc-dialog-content,
+  .mdc-dialog__content {
+    padding: 0;
+    max-height: none;
+  }
+
+  .mat-mdc-dialog-container {
+    --mdc-dialog-container-color: transparent;
+  }
+}

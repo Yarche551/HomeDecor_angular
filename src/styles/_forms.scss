@@ -1,0 +1,181 @@
+@import "variables";
+
+// Общие блоки форм оформления заказа и личного кабинета (по макету)
+.form-block {
+  margin-bottom: 30px;
+
+  .form-block-title {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 130%;
+    color: $gray-text-color;
+    margin-bottom: 20px;
+  }
+
+  .form-block-hint {
+    font-size: 16px;
+    line-height: 130%;
+    color: $gray-text-color;
+    max-width: 528px;
+    margin: -8px 0 20px 0;
+  }
+}
+
+.form-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 646px;
+
+  .form-field {
+    input.input,
+    textarea.input {
+      width: 210px;
+    }
+
+    // «Улица» занимает отдельную строку
+    &.form-field-wide {
+      width: 100%;
+
+      input.input {
+        width: 428px;
+      }
+    }
+
+    &.form-field-narrow input.input {
+      width: 125px;
+    }
+
+    &.form-field-apartment input.input {
+      width: 162px;
+    }
+
+    .form-field-error {
+      margin-top: 4px;
+      font-size: 12px;
+      color: $status-cancelled;
+    }
+  }
+}
+
+textarea.input.form-comment {
+  width: 646px;
+  height: 130px;
+  padding: 17px 20px;
+  resize: none;
+}
+
+// Переключатель «Курьером / Самовывоз»
+.form-tabs {
+  display: flex;
+  width: 340px;
+  height: 49px;
+  box-sizing: border-box;
+  border: 1px solid $green-accent;
+  border-radius: 3px;
+  overflow: hidden;
+
+  .form-tab {
+    flex: 1 1 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    font-size: 18px;
+    color: $gray-text-color;
+
+    &.active {
+      background: $green-accent;
+      color: #ffffff;
+    }
+  }
+}
+
+.form-pickup {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 130%;
+  color: $gray-text-color;
+}
+
+// Радиокнопки способа оплаты
+.form-radios {
+  .form-radio {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    cursor: pointer;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    input {
+      appearance: none;
+      margin: 0 12px 0 0;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      border: 1.5px solid $green-input-border;
+      border-radius: 50%;
+      position: relative;
+      cursor: pointer;
+
+      &:checked::after {
+        content: '';
+        position: absolute;
+        left: 3.5px;
+        top: 3.5px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: $green-input-border;
+      }
+    }
+
+    span {
+      font-size: 16px;
+      line-height: 130%;
+      color: $gray-text-color;
+    }
+
+    input:checked + span {
+      font-weight: 500;
+    }
+  }
+}
+
+// Вкладки личного кабинета
+.personal-tabs {
+  display: flex;
+  width: 417px;
+  border-bottom: 2px solid $green-light;
+  margin-bottom: 50px;
+
+  .personal-tab {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 0 15px 10px 15px;
+    font-family: 'Lora', sans-serif;
+    font-size: 26px;
+    line-height: 130%;
+    color: $green-text-color;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+
+    &:first-child {
+      width: 230px;
+    }
+
+    &:last-child {
+      width: 187px;
+    }
+
+    &.active {
+      border-bottom-color: $green-accent;
+    }
+  }
+}

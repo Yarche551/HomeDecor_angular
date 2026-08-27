@@ -1,0 +1,41 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.profile {
+  padding-top: 50px;
+  padding-bottom: 110px;
+  overflow: hidden;
+
+  .container {
+    position: relative;
+  }
+
+  .profile-title {
+    @include head-lora-32;
+    margin-bottom: 30px;
+  }
+
+  .profile-form {
+    position: relative;
+    z-index: 1;
+    width: 646px;
+
+    .button {
+      width: 169px;
+      margin-top: 20px;
+    }
+  }
+
+  // Декоративное растение из макета
+  .profile-decor {
+    position: absolute;
+    left: 290px;
+    top: 400px;
+    width: 1025px;
+    height: 587px;
+    background-image: url('/images/page/main.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+}
