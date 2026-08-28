@@ -6,6 +6,24 @@ html, body {
   font-weight: 400;
 }
 
+// Прижимаем футер к низу экрана, даже если контента мало
+app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  > app-header,
+  > app-footer {
+    flex-shrink: 0;
+  }
+
+  // страница, подставленная роутером, занимает всё оставшееся место
+  > router-outlet + * {
+    display: block;
+    flex: 1 0 auto;
+  }
+}
+
 .container {
   max-width: $container-width;
   margin: 0 auto;

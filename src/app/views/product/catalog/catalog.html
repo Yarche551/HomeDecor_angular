@@ -23,8 +23,8 @@
         }
       </div>
 
-      <div class="catalog-sorting" [class.open]="sortingOpen" (click)="toggleSorting()">
-        <div class="catalog-sorting-head">
+      <div class="catalog-sorting" [class.open]="sortingOpen">
+        <div class="catalog-sorting-head" (click)="toggleSorting($event)">
           <span>Сортировать</span>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -70,7 +70,7 @@
       <div class="pagination">
         <div class="pagination-arrow"
              (click)="openPrevPage()"
-             [class.disabled]="activeParams.page ? activeParams.page === 1 : true">
+             [class.disabled]="currentPage === 1">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M9.56988 5.09176C9.75988 5.09176 9.94988 5.16057 10.0999 5.30801C10.3899 5.59307 10.3899 6.06489 10.0999 6.34994L4.55988 11.7955L10.0999 17.2411C10.3899 17.5262 10.3899 17.998 10.0999 18.283C9.80988 18.5681 9.32988 18.5681 9.03988 18.283L2.96988 12.3165C2.67988 12.0314 2.67988 11.5596 2.96988 11.2746L9.03988 5.30801C9.18988 5.16057 9.37988 5.09176 9.56988 5.09176Z"
@@ -85,13 +85,13 @@
           @for (page of pages; track page) {
             <a class="pagination-page"
                (click)="openPage(page)"
-               [class.active]="this.activeParams.page ? this.activeParams.page == page : (page === 1)">{{ page }}</a>
+               [class.active]="currentPage === page">{{ page }}</a>
           }
         </div>
 
         <div class="pagination-arrow"
              (click)="openNextPage()"
-             [class.disabled]="activeParams.page ? activeParams.page === pages.length : false">
+             [class.disabled]="currentPage === pages.length">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M14.4301 18.4993C14.2401 18.4993 14.0501 18.4305 13.9001 18.2831C13.6101 17.998 13.6101 17.5262 13.9001 17.2411L19.4401 11.7955L13.9001 6.34996C13.6101 6.06491 13.6101 5.59309 13.9001 5.30803C14.1901 5.02297 14.6701 5.02297 14.9601 5.30803L21.0301 11.2746C21.3201 11.5596 21.3201 12.0315 21.0301 12.3165L14.9601 18.2831C14.8101 18.4305 14.6201 18.4993 14.4301 18.4993Z"

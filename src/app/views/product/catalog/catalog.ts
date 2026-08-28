@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  HostListener,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, inject, OnInit } from '@angular/core';
 import { ProductCard } from '../../../shared/components/product-card/product-card';
 import { ProductService } from '../../../shared/services/product';
 import { ProductType } from '../../../../types/product.type';
@@ -30,7 +23,6 @@ export class Catalog implements OnInit {
   activatedRoute = inject(ActivatedRoute);
   productService = inject(ProductService);
   router = inject(Router);
-  private elementRef = inject(ElementRef);
   products: ProductType[] = [];
   categoriesWithTypes: CategoryWithTypeType[] = [];
   activeParams: ActiveParamsType = { types: [] };
@@ -129,16 +121,16 @@ export class Catalog implements OnInit {
     });
   }
 
-  toggleSorting() {
+  toggleSorting(event: MouseEvent): void {
+    // клик по самой кнопке не должен сразу закрываться обработчиком ниже
+    event.stopPropagation();
     this.sortingOpen = !this.sortingOpen;
   }
 
-  /** закрываем выпадающий список сортировки при клике вне него */
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent): void {
-    if (this.sortingOpen && !this.elementRef.nativeElement.contains(event.target)) {
-      this.sortingOpen = false;
-    }
+  /** список сортировки закрывается по клику в любом месте экрана */
+  @HostListener('document:click')
+  closeSorting(): void {
+    this.sortingOpen = false;
   }
 
   sort(value: string) {
@@ -149,7 +141,15 @@ export class Catalog implements OnInit {
     });
   }
 
+  /** если параметра page нет в URL — открыта первая страница */
+  get currentPage(): number {
+    return this.activeParams.page ? this.activeParams.page : 1;
+  }
+
   openPage(page: number) {
+    if (page === this.currentPage) {
+      return;
+    }
     this.activeParams.page = page;
     this.router.navigate(['/catalog'], {
       queryParams: this.activeParams,
@@ -157,8 +157,8 @@ export class Catalog implements OnInit {
   }
 
   openPrevPage() {
-    if (this.activeParams.page && this.activeParams.page > 1) {
-      this.activeParams.page--;
+    if (this.currentPage > 1) {
+      this.activeParams.page = this.currentPage - 1;
       this.router.navigate(['/catalog'], {
         queryParams: this.activeParams,
       });
@@ -166,8 +166,8 @@ export class Catalog implements OnInit {
   }
 
   openNextPage() {
-    if (this.activeParams.page && this.activeParams.page < this.pages.length) {
-      this.activeParams.page++;
+    if (this.currentPage < this.pages.length) {
+      this.activeParams.page = this.currentPage + 1;
       this.router.navigate(['/catalog'], {
         queryParams: this.activeParams,
       });

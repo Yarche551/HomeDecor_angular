@@ -23,7 +23,10 @@ export class ActiveParamsUtil {
       activeParams.sort = params['sort'];
     }
     if (params.hasOwnProperty('page')) {
-      activeParams.page = params['page'];
+      // из URL параметр приходит строкой — приводим к числу,
+      // иначе сравнения и инкремент страницы работают некорректно
+      const page = Number(params['page']);
+      activeParams.page = !page || page < 1 ? 1 : page;
     }
     return activeParams;
   }
